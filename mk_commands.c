@@ -58,7 +58,7 @@ void find_cmd(char *command, trie_t *trie)
 
 	tnode_t *node = search(key, trie->root, trie->data_size);
 	if (node) {
-		printf("%s\n", (char *)node->value);
+		printf("%s %d\n", (char *)node->value, node->freq);
 		
 	} else {
 		printf("No result\n");
@@ -67,14 +67,18 @@ void find_cmd(char *command, trie_t *trie)
 }
 
 
-void find_words(void *key, tnode_t *root, int k, int *found)
+void find_words(void *key, tnode_t *root, int k, int *found, int size)
 {
 	if (!root || k < 0)
 		return;	
-	
-	if (*(char *)key == '\0' && root->end_word == 1) {
+	if (root->value)
+		if ((int)strlen((char *)root->value) > size)
+			return;
+
+	if (*(char *)key == '\0' && root->end_word == 1)  {
+			printf("%s\n", (char *)root->value);
 		*found = 1;
-		printf("%s\n", (char *)root->value);
+		return;
 	}
 	
 	tnode_t *next_node;
@@ -82,13 +86,12 @@ void find_words(void *key, tnode_t *root, int k, int *found)
 	for (int i = 0; i < ALPHABET_SIZE; ++i) {
 		next_node = root->children[i];
 		if (i == *(char *)key - 'a')
-			find_words((void *)((char *)key + 1), next_node, k, found);
+			find_words((void *)((char *)key + 1), next_node, k, found, size);
 		else
-			find_words((void *)((char *)key + 1), next_node, k - 1, found);
+			find_words((void *)((char *)key + 1), next_node, k - 1, found, size);
 		
 	}
 }
-
 
 void autocorrect_cmd(char *command, trie_t *trie)
 {
@@ -99,7 +102,7 @@ void autocorrect_cmd(char *command, trie_t *trie)
 	kk = strtok(NULL, " ");
 	int k = atoi(kk);
 
-	find_words(key, trie->root, k, &found);
+	find_words(key, trie->root, k, &found, (int)strlen(key));
 	if (!found)
 		printf("No words found\n");
 }

@@ -42,6 +42,9 @@ tnode_t *search(void *key, tnode_t *root, int data_size)
 	if (*(char *)key == '\0' && root->end_word == 1)
 		return root;
 	
+	if (*(char *)key == '\0' && root->end_word == 0)
+		return NULL;
+	
 	tnode_t *next_node = root->children[*(char *)key - 'a'];
 	if (!next_node)
 		return NULL;
@@ -70,7 +73,13 @@ void insert(tnode_t *node, void *key, void *value, int data_size)
 		next_node = node->children[*(char *)key - 'a'];
 	}
 
-	insert(next_node, (void *)((char *)key + 1), value, data_size);
+	void *value_copy = malloc(data_size);
+    DIE(!value_copy, "malloc value_copy");
+    memcpy(value_copy, value, data_size);
+
+	insert(next_node, (void *)((char *)key + 1), value_copy, data_size);
+
+	free(value_copy);
 }
 
 void insert_trie(trie_t *trie, void *key)
@@ -79,6 +88,7 @@ void insert_trie(trie_t *trie, void *key)
 	char *value = malloc(trie->data_size);
 	DIE(!value, "malloc value");
 	strcpy(value, key);
+
 	tnode_t *searched_node  = search(value, trie->root, trie->data_size);
 	if (!searched_node) {
 		insert(trie->root, key, value, trie->data_size);
@@ -87,7 +97,7 @@ void insert_trie(trie_t *trie, void *key)
 		searched_node->freq++;
 	}
 
-    free(value);
+	free(value);
 }
 
 void delete_node(tnode_t *node)

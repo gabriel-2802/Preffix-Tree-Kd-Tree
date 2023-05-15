@@ -1,16 +1,16 @@
 # compiler setup
 CC=gcc
-CFLAGS=-Wall -Wextra -Wshadow -Wpedantic -std=c99 -O0 -g
+CFLAGS=-Wall -Wextra -Wshadow -Wpedantic -std=c99 -O0 -g -ggdb
 
 # define targets
 TARGETS=kNN mk
 
 #define object-files
-OBJ=mk.o kNN.o
+OBJ=mk.o kNN.o aux_functions.o mk_commands.o trie.o
 
 build: $(TARGETS)
 
-mk: mk.o
+mk: mk.o aux_functions.o mk_commands.o trie.o
 	$(CC) $(CFLAGS) $^ -o $@
 
 kNN: kNN.o

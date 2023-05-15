@@ -31,7 +31,6 @@ struct trie_t {
 	/* number of keys */
 	int size;
 	int data_size;
-	/* nr of nodes */
 };
 
 tnode_t *node_create();
