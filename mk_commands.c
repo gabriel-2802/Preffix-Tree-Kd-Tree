@@ -31,7 +31,13 @@ void load_cmd(char *command, trie_t *trie)
 		if (line[len - 1] == '\n')
 			line[len - 1] = '\0';
 		
-		char *key = strtok(line, " ");
+		len = strlen(line);
+		for (int i = 0; i < len; ++i)
+			if ((line[i] < 'a' || line[i] > 'z' ))
+				line[i] = ' ';
+
+
+		char *key = strtok(line, " \t");
 		while (key) {
 			insert_trie(trie, key);
 			key = strtok(NULL, " ");

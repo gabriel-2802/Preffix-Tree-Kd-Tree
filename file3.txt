@@ -1,10 +1,2 @@
 LOAD file.txt
-AUTOCORRECT noi 2
-FIND gabriel
-REMOVE gabriel
-FIND gabriel
-INSERT gabriel
-FIND gabriel
-INSERT gabriell
-FIND gabriel
 EXIT
