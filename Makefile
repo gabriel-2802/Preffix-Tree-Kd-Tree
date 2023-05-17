@@ -6,14 +6,14 @@ CFLAGS=-Wall -Wextra -Wshadow -Wpedantic -std=c99 -O0 -g -ggdb
 TARGETS=kNN mk
 
 #define object-files
-OBJ=mk.o kNN.o aux_functions.o mk_commands.o trie.o
+OBJ=mk.o kNN.o aux_functions.o mk_commands.o trie.o kd_tree.o kd_commands.o
 
 build: $(TARGETS)
 
 mk: mk.o aux_functions.o mk_commands.o trie.o
 	$(CC) $(CFLAGS) $^ -o $@
 
-kNN: kNN.o
+kNN: kNN.o kd_tree.o kd_commands.o
 	$(CC) $(CFLAGS) $^ -o $@
 
 %.o: %.c
