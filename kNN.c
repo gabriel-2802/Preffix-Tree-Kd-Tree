@@ -6,8 +6,6 @@
 #include "kd_tree.h"
 #include "kd_commands.h"
 #include "aux_functions.h"
-#define INITAL_SIZE 10
-
 
 int main(void)
 {

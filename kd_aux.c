@@ -12,6 +12,7 @@ double distance(int *x, int *y, int k)
 {
 	double dist = 0, xi, yi;
 
+	/* se parcurg toate coordonatele celor 2 puncte */
 	for (int i = 0; i < k ;++i) {
 		xi = (double)x[i];
 		yi = (double)y[i];
@@ -24,17 +25,22 @@ double distance(int *x, int *y, int k)
 
 void add_point(point_t **points, int *size, int *capacity, int *new_point, double dist, int k)
 {
+	/* daca nr de elemente este egal cu val maxima a array-ului vom dubla capacitatea
+	si realocam intreg vectorul */
 	if (*size == *capacity) {
 		*capacity *= 2;
+		/* programare defensiva */
 		point_t *aux = realloc(*points, sizeof(point_t) * (*capacity));
 		DIE(!aux, "realloc");
 
 		*points = aux;
 	}
 
+	/* alocam noul punct */
 	(*points)[*size].point = malloc(sizeof(int) * k);
 	DIE(!(*points)[*size].point, "malloc");
 
+	/* adaugam noul punct in vector */
 	memcpy((*points)[*size].point, new_point, sizeof(int) * k);
 	(*points)[*size].dist_from_start = dist;
 	(*size)++;	
@@ -49,19 +55,22 @@ void print_point(int *point, int k)
 
 void purge (point_t **points, int *size, int *capacity)
 {
+	/* eliberam intreg vectorul de puncte din memorie */
 	for (int i = 0; i < *size; ++i)
 		free((*points)[i].point);
-	free(*points);
 	*size = 0;
 
+	/* realocam vectorul la valorea initala, minima */
 	*capacity = INITAL_SIZE;
-	*points = malloc(sizeof(point_t) * (*capacity));
+	point_t *aux = realloc(*points, sizeof(point_t) * (*capacity));
 	DIE(!(*points), "malloc");
+	*points = aux;
 }
 
 
 int different_value(point_t *points, int size, int *new_point, int k)
 {
+	/* verificam daca noul punct este deja in vector */
 	for (int i = 0; i < size; ++i)
 		if (!memcmp(points[i].point, new_point, sizeof(int) * k))
 			return 0;
@@ -71,11 +80,13 @@ int different_value(point_t *points, int size, int *new_point, int k)
 
 int nn_compare(const void *a, const void *b)
 {
+	/* comparam punctele coordonata cu coordonata */
 	return !memcmp(a, b, sizeof(point_t));
 }
 
 int range_compare(const void *a, const void *b)
 {
+	/* comparam distantele de la punctul de start */
 	double x = ((point_t *)a)->dist_from_start;
 	double y = ((point_t *)b)->dist_from_start;
 
@@ -88,6 +99,7 @@ int range_compare(const void *a, const void *b)
 
 int check_point(int *point, int *start, int *end, int k)
 {
+	/* verificam daca punctul se afla in intervalul dat */
 	for (int i = 0; i < k; ++i)
 		if (point[i] < start[i] || point[i] > end[i])
 			return 0;

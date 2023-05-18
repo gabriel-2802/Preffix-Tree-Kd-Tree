@@ -32,8 +32,6 @@ void mk_commands(int *cmd, char *string)
 
 void knn_commands(int *cmd, char *string)
 {
-	/*pentru un meniu mai eye-candy vom transforma comanda primita
-	in valori numerice */
 	char copy[NMAX];
 	//folosim a copie pentru a nu denatura string-ul cu strtok
 	strcpy(copy, string);
