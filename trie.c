@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include "aux_functions.h"
 #include "trie.h"
 
 tnode_t *node_create()
@@ -50,6 +51,21 @@ tnode_t *search(void *key, tnode_t *root, int data_size)
 		return NULL;
 
 	return search((void *)((char *)key + 1), next_node, data_size);
+}
+
+tnode_t *search_prefix(char *key, tnode_t *root)
+{
+	if (!root)
+		return NULL;
+	
+	if (*(char *)key == '\0')
+		return root;
+	
+	tnode_t *next_node = root->children[*(char *)key - 'a'];
+	if (!next_node)
+		return NULL;
+
+	return search_prefix((void *)((char *)key + 1), next_node);
 }
 
 void insert(tnode_t *node, void *key, void *value, int data_size)

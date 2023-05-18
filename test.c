@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <string.h>
-
+#include <math.h>
 int main()
 {
-    char *s = NULL;
-    printf("%d \n", (int)strlen(s));
+    double x = -2.67;
+    x = fabs(x);
+
+    printf("%lf", x);
 
     
     return 0;

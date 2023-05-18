@@ -5,13 +5,6 @@
 #include <errno.h>
 #define ALPHABET_SIZE 26
 #define MAX_WORD_SIZE 100
-#define DIE(assertion, call_description) do {				\
-	if (assertion) {										\
-		fprintf(stderr, "(%s, %d): ", __FILE__, __LINE__);	\
-		perror(call_description);							\
-		exit(errno);										\
-	}														\
-} while (0)
 
 typedef struct tnode_t tnode_t;
 typedef struct trie_t trie_t;
@@ -38,6 +31,8 @@ tnode_t *node_create();
 trie_t *trie_create(int data_size);
 
 tnode_t *search(void *key, tnode_t *root, int data_size);
+
+tnode_t *search_prefix(char *key, tnode_t *root);
 
 void insert(tnode_t *node, void *key, void *value, int data_size);
 

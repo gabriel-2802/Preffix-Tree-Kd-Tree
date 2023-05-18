@@ -4,34 +4,32 @@
 #include <string.h>
 #include <errno.h>
 #include "kd_tree.h"
-#define DIE(assertion, call_description) do {				\
-	if (assertion) {										\
-		fprintf(stderr, "(%s, %d): ", __FILE__, __LINE__);	\
-		perror(call_description);							\
-		exit(errno);										\
-	}														\
-} while (0)
 
 typedef struct kd_node_t kd_node_t;
 typedef struct kd_tree_t kd_tree_t;
+typedef struct point point_t;
 
 struct kd_node_t {
-	void *point;
+	int *point;
 	kd_node_t *left, *right;
 };
 
 struct kd_tree_t {
 	int k;
-	int data_size;
 	kd_node_t *root;
 
 };
 
-kd_tree_t *create_kd(int k, int data_size);
+struct point {
+	int *point;
+	double dist_from_start;
+};
 
-kd_node_t *create_kd_node(void *point, int data_size, int k);
+kd_tree_t *create_kd_tree(int k);
 
-kd_node_t *insertion(void *point, kd_node_t *node, int data_size, int k, int dim);
+kd_node_t *create_kd_node(int *point, int k);
+
+kd_node_t *insertion(int *point, kd_node_t *node, int k, int dim);
 
 void free_kd_node(kd_node_t *node);
 

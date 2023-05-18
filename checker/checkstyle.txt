@@ -1,1 +1,92 @@
-Run checker first
+./aux_functions.c:27: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./aux_functions.c:28: ERROR:CODE_INDENT: code indent should use tabs where possible
+./aux_functions.c:28: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./aux_functions.c:75: WARNING:MISSING_EOF_NEWLINE: adding a line without newline at end of file
+./trie.h:36: ERROR:FUNCTION_WITHOUT_ARGS: Bad function definition - tnode_t *node_create() should probably be tnode_t *node_create(void)
+./trie.h:54: WARNING:MISSING_EOF_NEWLINE: adding a line without newline at end of file
+./mk_commands.c:33: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./mk_commands.c:36: ERROR:SPACING: space prohibited before that close parenthesis ')'
+./mk_commands.c:39: CHECK:LINE_SPACING: Please don't use multiple blank lines
+./mk_commands.c:44: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./mk_commands.c:66: WARNING:BRACES: braces {} are not necessary for any arm of this statement
+./mk_commands.c:68: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./mk_commands.c:73: CHECK:BRACES: Blank lines aren't necessary before a close brace '}'
+./mk_commands.c:75: CHECK:LINE_SPACING: Please don't use multiple blank lines
+./mk_commands.c:79: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./mk_commands.c:84: WARNING:SUSPECT_CODE_INDENT: suspect code indent for conditional statements (4, 12)
+./mk_commands.c:89: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./mk_commands.c:97: CHECK:LONG_LINE: line length of 81 exceeds 80 columns
+./mk_commands.c:98: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./mk_commands.c:99: CHECK:BRACES: Blank lines aren't necessary before a close brace '}'
+./mk_commands.c:114: WARNING:MISSING_EOF_NEWLINE: adding a line without newline at end of file
+./trie.c:7: ERROR:FUNCTION_WITHOUT_ARGS: Bad function definition - tnode_t *node_create() should probably be tnode_t *node_create(void)
+./trie.c:41: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./trie.c:44: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./trie.c:47: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./trie.c:59: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./trie.c:62: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./trie.c:92: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./trie.c:93: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./trie.c:102: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./trie.c:102: CHECK:BRACES: Blank lines aren't necessary after an open brace '{'
+./trie.c:122: ERROR:CODE_INDENT: code indent should use tabs where possible
+./trie.c:122: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./trie.c:123: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./trie.c:124: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./trie.c:144: CHECK:LONG_LINE: line length of 81 exceeds 80 columns
+./trie.c:147: CHECK:LONG_LINE_COMMENT: line length of 84 exceeds 80 columns
+./trie.c:171: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./mk_commands.h:19: CHECK:LINE_SPACING: Please don't use multiple blank lines
+./mk_commands.h:20: WARNING:MISSING_EOF_NEWLINE: adding a line without newline at end of file
+./kd_tree.h:37: WARNING:MISSING_EOF_NEWLINE: adding a line without newline at end of file
+./kNN.c:22: ERROR:SPACING: space required after that ';' (ctx:WxO)
+./kNN.c:32: CHECK:LONG_LINE: line length of 94 exceeds 80 columns
+./kNN.c:47: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./kNN.c:57: WARNING:SPACING: space prohibited between function name and open parenthesis '('
+./kNN.c:69: CHECK:LINE_SPACING: Please don't use multiple blank lines
+./kNN.c:75: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./kNN.c:79: CHECK:LONG_LINE: line length of 115 exceeds 80 columns
+./kNN.c:96: WARNING:BRACES: braces {} are not necessary for single statement blocks
+./kNN.c:99: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./kNN.c:101: CHECK:LONG_LINE: line length of 83 exceeds 80 columns
+./kNN.c:102: CHECK:LONG_LINE: line length of 84 exceeds 80 columns
+./kNN.c:104: CHECK:LONG_LINE: line length of 84 exceeds 80 columns
+./kNN.c:105: CHECK:LONG_LINE: line length of 83 exceeds 80 columns
+./kNN.c:165: CHECK:LONG_LINE: line length of 109 exceeds 80 columns
+./kNN.c:169: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./kNN.c:171: CHECK:LONG_LINE: line length of 91 exceeds 80 columns
+./kNN.c:177: CHECK:LONG_LINE: line length of 81 exceeds 80 columns
+./kNN.c:179: CHECK:BRACES: Blank lines aren't necessary before a close brace '}'
+./kNN.c:217: WARNING:QUOTED_WHITESPACE_BEFORE_NEWLINE: unnecessary whitespace before a quoted newline
+./kNN.c:232: CHECK:BRACES: Blank lines aren't necessary after an open brace '{'
+./kNN.c:245: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./kNN.c:267: CHECK:BRACES: Blank lines aren't necessary before a close brace '}'
+./test.c:4: ERROR:FUNCTION_WITHOUT_ARGS: Bad function definition - int main() should probably be int main(void)
+./test.c:6: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./test.c:7: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./test.c:9: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./test.c:11: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./test.c:11: CHECK:LINE_SPACING: Please don't use multiple blank lines
+./test.c:11: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./test.c:12: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./test.c:13: WARNING:MISSING_EOF_NEWLINE: adding a line without newline at end of file
+./kd_tree.c:23: CHECK:SPACING: spaces preferred around that '*' (ctx:VxW)
+./kd_tree.c:38: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./kd_tree.c:39: CHECK:LINE_SPACING: Please don't use multiple blank lines
+./kd_tree.c:44: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./kd_tree.c:59: CHECK:LINE_SPACING: Please don't use multiple blank lines
+./kd_tree.c:67: WARNING:MISSING_EOF_NEWLINE: adding a line without newline at end of file
+./mk.c:27: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./mk.c:32: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./mk.c:39: CHECK:LONG_LINE: line length of 83 exceeds 80 columns
+./mk.c:61: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./mk.c:91: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./mk.c:114: ERROR:SWITCH_CASE_INDENT_LEVEL: switch and case should be at the same indent
+./mk.c:126: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./mk.c:129: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./mk.c:130: CHECK:BRACES: Blank lines aren't necessary before a close brace '}'
+./mk.c:131: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./mk.c:132: CHECK:BRACES: Blank lines aren't necessary before a close brace '}'
+./mk.c:135: ERROR:TRAILING_WHITESPACE: trailing whitespace
+./mk.c:178: CHECK:BRACES: Blank lines aren't necessary before a close brace '}'
+./kd_commands.c:32: WARNING:MISSING_EOF_NEWLINE: adding a line without newline at end of file

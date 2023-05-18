@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -111,4 +112,129 @@ void autocorrect_cmd(char *command, trie_t *trie)
 	find_words(key, trie->root, k, &found, (int)strlen(key));
 	if (!found)
 		printf("No words found\n");
+}
+
+
+tnode_t *find_first_word(tnode_t *root)
+{
+	if (!root)
+		return NULL;
+
+	if (root->end_word)
+		return root;
+
+	for (int i = 0; i < ALPHABET_SIZE; i++) {
+		tnode_t *next_node = root->children[i];
+		if (next_node)
+			return find_first_word(next_node);
+	}
+
+	return NULL;
+}
+
+void print_first_word(tnode_t *pref_node)
+{	
+	if (pref_node->end_word) {
+		printf("%s\n", (char *)pref_node->value);
+		return;
+	}
+	
+	tnode_t *print_first_word = find_first_word(pref_node);
+	printf("%s\n", (char *)print_first_word->value);
+}
+
+void find_shortest_word(tnode_t *pref_node, char *word, int *min_size)
+{
+	if (pref_node->end_word && (int)strlen((char *)pref_node->value) < *min_size) {
+		*min_size = strlen((char *)pref_node->value);
+		strcpy(word, (char *)pref_node->value);
+	}
+
+	for (int i = 0; i < ALPHABET_SIZE; ++i) {
+		tnode_t *next_node = pref_node->children[i];
+		if (next_node)
+			find_shortest_word(next_node, word, min_size);
+	}
+}
+
+void print_shortest_word(tnode_t *pref_node)
+{
+	char *word = malloc(MAX_WORD_SIZE);
+	DIE(!word, "malloc word");
+
+	int min_size = MAX_WORD_SIZE;
+	find_shortest_word(pref_node, word, &min_size);
+
+	if (min_size == MAX_WORD_SIZE)
+		printf("No words found\n");
+	else 
+		printf("%s\n", word);
+	free(word);
+}
+
+void find_most_freq_word(tnode_t *pref_node, char *word, int *freq)
+{
+	if (pref_node->end_word && pref_node->freq > *freq) {
+		*freq = pref_node->freq;
+		strcpy(word, (char *)pref_node->value);
+	}
+
+	for (int i = 0; i < ALPHABET_SIZE; ++i) {
+		tnode_t *next_node = pref_node->children[i];
+		if (next_node)
+			find_most_freq_word(next_node, word, freq);
+	}
+}
+
+void print_most_freq_word(tnode_t *pref_node)
+{
+	char *word = malloc(MAX_WORD_SIZE);
+	DIE(!word, "malloc word");
+	int freq = -1;
+
+	find_most_freq_word(pref_node, word, &freq);
+	if (freq != -1)
+		printf("%s\n", word);
+	else
+		printf("No words found\n");
+	
+	free(word);
+}
+
+void autocomplete_cmd(char *command, trie_t *trie)
+{
+	char *key, *criterium;
+	key = strtok(command, " ");
+	key = strtok(NULL, " ");
+	criterium = strtok(NULL, " ");
+	int crit = atoi(criterium);
+
+	tnode_t *pref_node = search_prefix(key, trie->root);
+	if (!pref_node) {
+		printf("No words found\n");
+
+		if (!crit) {
+			printf("No words found\n");
+			printf("No words found\n");
+		}
+		return;
+	}
+
+	switch (crit) {
+		case 0:
+			print_first_word(pref_node);
+			print_shortest_word(pref_node);
+			print_most_freq_word(pref_node);
+			break;
+		case 1:
+			print_first_word(pref_node);
+			break;
+		case 2:
+			print_shortest_word(pref_node);
+			break;
+		case 3:	
+			print_most_freq_word(pref_node);
+			break;
+	}
+	
 }

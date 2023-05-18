@@ -3,7 +3,7 @@
 #include <string.h>
 #include "aux_functions.h"
 
-void command(int *cmd, char *string)
+void mk_commands(int *cmd, char *string)
 {
 	/*pentru un meniu mai eye-candy vom transforma comanda primita
 	in valori numerice */
@@ -26,6 +26,27 @@ void command(int *cmd, char *string)
 		*cmd = 6;
     else if (!strcmp(first_word, "FIND"))
         *cmd = 7;
+	else
+		*cmd = -1;
+}
+
+void knn_commands(int *cmd, char *string)
+{
+	/*pentru un meniu mai eye-candy vom transforma comanda primita
+	in valori numerice */
+	char copy[NMAX];
+	//folosim a copie pentru a nu denatura string-ul cu strtok
+	strcpy(copy, string);
+	char *first_word = strtok(copy, " ");
+
+	if (!strcmp(first_word, "LOAD"))
+		*cmd = 1;
+	else if (!strcmp(first_word, "NN"))
+		*cmd = 2;
+	else if (!strcmp(first_word, "RS"))
+		*cmd = 3;
+	else if (!strcmp(string, "EXIT"))
+		*cmd = 4;
 	else
 		*cmd = -1;
 }

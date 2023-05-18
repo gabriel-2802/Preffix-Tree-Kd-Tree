@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "errno.h": "c"
+        "errno.h": "c",
+        "kd_commands.h": "c",
+        "aux_functions.h": "c"
     }
 }
