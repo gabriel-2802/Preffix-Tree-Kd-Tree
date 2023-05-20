@@ -39,6 +39,7 @@ void add_point(point_t **points, int *size, int *capacity,
 	/* alocam noul punct */
 	(*points)[*size].point = malloc(sizeof(int) * k);
 	DIE(!(*points)[*size].point, "malloc");
+	(*points)[*size].k = k;
 
 	/* adaugam noul punct in vector */
 	memcpy((*points)[*size].point, new_point, sizeof(int) * k);
@@ -80,7 +81,31 @@ int different_value(point_t *points, int size, int *new_point, int k)
 int nn_compare(const void *a, const void *b)
 {
 	/* comparam punctele coordonata cu coordonata */
-	return !memcmp(a, b, sizeof(point_t));
+	point_t *point_a = (point_t *)a;
+	point_t *point_b = (point_t *)b;
+
+	int *x = malloc(sizeof(int) * point_a->k);
+	int *y = malloc(sizeof(int) * point_a->k);
+	DIE(!x || !y, "malloc\n");
+
+	memcpy(x, point_a->point, sizeof(int) * point_a->k);
+	memcpy(y, point_b->point, sizeof(int) * point_a->k);
+	/* consideram ca x < y*/
+	int res = -1;
+
+	for (int i = 0; i < point_a->k; ++i) {
+		/* parcugem coordonatele de la stanga la dreapta, iar daca
+		obtinem un x[i] > y[i], insemna ca x este mai mare deci
+		iesim din for*/
+		if (x[i] > y[i]) {
+			res = 1;
+			break;
+		}
+	}
+
+	free(x);
+	free(y);
+	return res;
 }
 
 int range_compare(const void *a, const void *b)

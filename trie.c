@@ -148,6 +148,7 @@ int remove_value(tnode_t *node, void *key)
 		/* daca nodul este sfarsit de cuvant, reinitializam end_word */
 		if (node->end_word) {
 			node->end_word = 0;
+			node->freq = 0;
 			return node->n_children == 0;
 		}
 

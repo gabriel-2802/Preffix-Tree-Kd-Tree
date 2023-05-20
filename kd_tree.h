@@ -28,6 +28,7 @@ struct kd_tree_t {
 struct point {
 	int *point;
 	double dist_from_start;
+	int k;
 };
 
 /* creeaza arborele
