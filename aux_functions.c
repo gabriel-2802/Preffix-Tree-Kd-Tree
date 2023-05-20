@@ -24,8 +24,8 @@ void mk_commands(int *cmd, char *string)
 		*cmd = 5;
 	else if (!strcmp(string, "EXIT"))
 		*cmd = 6;
-    else if (!strcmp(first_word, "FIND"))
-        *cmd = 7;
+	else if (!strcmp(first_word, "FIND"))
+		*cmd = 7;
 	else
 		*cmd = -1;
 }

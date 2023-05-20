@@ -28,10 +28,10 @@ struct trie_t {
 	int data_size;
 };
 
-/* creeaza nodul nou 
- * @return: nodul nou creat 
+/* creeaza nodul nou
+ * @return: nodul nou creat
 */
-tnode_t *node_create();
+tnode_t *node_create(void);
 
 /* creeaza trie-ul
  * @param1: dimensiunea datelor din noduri
@@ -57,7 +57,7 @@ tnode_t *search_prefix(char *key, tnode_t *root);
 /* insereaza un nod in trie, inital key == value
  * @param1: nodul in care se insereaza
  * @param2: cheia dupa care se insereaza
- * @param3: valoarea de inserat 
+ * @param3: valoarea de inserat
  * @param4: dimensiunea datelor din noduri
  * @return: nodul in care se termina pref, NULL altfel
  */

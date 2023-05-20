@@ -7,13 +7,12 @@
 #include "kd_commands.h"
 #include "aux_functions.h"
 
-
 double distance(int *x, int *y, int k)
 {
 	double dist = 0, xi, yi;
 
 	/* se parcurg toate coordonatele celor 2 puncte */
-	for (int i = 0; i < k ;++i) {
+	for (int i = 0; i < k; ++i) {
 		xi = (double)x[i];
 		yi = (double)y[i];
 
@@ -23,10 +22,11 @@ double distance(int *x, int *y, int k)
 	return sqrt(dist);
 }
 
-void add_point(point_t **points, int *size, int *capacity, int *new_point, double dist, int k)
+void add_point(point_t **points, int *size, int *capacity,
+			   int *new_point, double dist, int k)
 {
-	/* daca nr de elemente este egal cu val maxima a array-ului vom dubla capacitatea
-	si realocam intreg vectorul */
+	/* daca nr de elemente este egal cu val maxima a array-ului
+	vom dubla capacitatea si realocam intreg vectorul */
 	if (*size == *capacity) {
 		*capacity *= 2;
 		/* programare defensiva */
@@ -43,7 +43,7 @@ void add_point(point_t **points, int *size, int *capacity, int *new_point, doubl
 	/* adaugam noul punct in vector */
 	memcpy((*points)[*size].point, new_point, sizeof(int) * k);
 	(*points)[*size].dist_from_start = dist;
-	(*size)++;	
+	(*size)++;
 }
 
 void print_point(int *point, int k)
@@ -53,7 +53,7 @@ void print_point(int *point, int k)
 	printf("\n");
 }
 
-void purge (point_t **points, int *size, int *capacity)
+void purge(point_t **points, int *size, int *capacity)
 {
 	/* eliberam intreg vectorul de puncte din memorie */
 	for (int i = 0; i < *size; ++i)
@@ -67,14 +67,13 @@ void purge (point_t **points, int *size, int *capacity)
 	*points = aux;
 }
 
-
 int different_value(point_t *points, int size, int *new_point, int k)
 {
 	/* verificam daca noul punct este deja in vector */
 	for (int i = 0; i < size; ++i)
 		if (!memcmp(points[i].point, new_point, sizeof(int) * k))
 			return 0;
-		
+
 	return 1;
 }
 
@@ -95,7 +94,6 @@ int range_compare(const void *a, const void *b)
 
 	return -1;
 }
-
 
 int check_point(int *point, int *start, int *end, int k)
 {

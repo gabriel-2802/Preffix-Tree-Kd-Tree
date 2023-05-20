@@ -22,8 +22,8 @@ double distance(int *x, int *y, int k);
  */
 
 void add_point(point_t **points, int *size, int *capacity, int *new_point,
-               double dist, int k);
-/* printeaza punctul 
+			   double dist, int k);
+/* printeaza punctul
  * @params1: punctul
  * @params2: nr de dimensiuni
  */
@@ -37,7 +37,7 @@ la dimensiunea initiala
  */
 void purge(point_t **points, int *size, int *capacity);
 
-/* verifica daca noul punct este deja in vector 
+/* verifica daca noul punct este deja in vector
  * @params1: vectorul de puncte
  * @params2: nr de puncte din vector
  * @params3: punctul ce verificat

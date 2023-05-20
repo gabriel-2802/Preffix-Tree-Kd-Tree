@@ -39,7 +39,8 @@ void load_cmd(char *command, kd_tree_t **tree)
 	fclose(fin);
 }
 
-void nn(int *point, kd_node_t *node, int dim, int k, double *best_dist, point_t **neighs, int *size, int *capacity)
+void nn(int *point, kd_node_t *node, int dim, int k, double *best_dist,
+		point_t **neighs, int *size, int *capacity)
 {
 	if (!node)
 		return;
@@ -51,30 +52,40 @@ void nn(int *point, kd_node_t *node, int dim, int k, double *best_dist, point_t 
 	de vecini */
 	if (*best_dist == -1) {
 		*best_dist = dist;
-		add_point(neighs, size, capacity, node->point, dist, k);
+		add_point(neighs, size, capacity, node->point, 0, k);
 	}
 
 	/* daca distanta este mai mica decat cea mai mica distanta gasita,
-	stergem elementele din vectorul de vecin,  adaugam noua val 
+	stergem elementele din vectorul de vecin,  adaugam noua val
 	si actualizam cea mai mica distanta */
 	if (dist < *best_dist) {
 		*best_dist = dist;
 		purge(neighs, size, capacity);
-		add_point(neighs, size, capacity, node->point, dist, k);
+		add_point(neighs, size, capacity, node->point, 0, k);
 	}
 
 	/* daca distanta este egala cu cea mai mica distanta gasita, o adaugam
 	in vectorul de vecini */
-	if (dist == *best_dist && different_value(*neighs, *size, node->point, k)) {
-		add_point(neighs, size, capacity, node->point, dist, k);
+	if (dist == *best_dist &&
+		different_value(*neighs, *size, node->point, k)) {
+		add_point(neighs, size, capacity, node->point, 0, k);
 	}
-	
+
+	/* calculam distanta de la point[dim] la coordonata dim a punctului ce
+	separa planul in 2 */
+	double split_dist = distance(point + dim, node->point + dim, 1);
 	if (point[dim] < node->point[dim]) {
-		nn(point, node->left, (dim + 1) % k, k, best_dist, neighs, size, capacity);
-		nn(point, node->right, (dim + 1) % k, k, best_dist, neighs, size, capacity);
+		nn(point, node->left, (dim + 1) % k, k, best_dist, neighs,
+		   size, capacity);
+		if (split_dist < *best_dist)
+			nn(point, node->right, (dim + 1) % k, k, best_dist, neighs,
+			   size, capacity);
 	} else {
-		nn(point, node->right, (dim + 1) % k, k, best_dist, neighs, size, capacity);
-		nn(point, node->left, (dim + 1) % k, k, best_dist, neighs, size, capacity);
+		nn(point, node->right, (dim + 1) % k, k, best_dist, neighs,
+		   size, capacity);
+		if (split_dist < *best_dist)
+			nn(point, node->left, (dim + 1) % k, k, best_dist, neighs,
+			   size, capacity);
 	}
 }
 
@@ -119,7 +130,7 @@ void range(kd_node_t *node, int *start, int *end, int dim, int k,
 {
 	if (!node)
 		return;
-	
+
 	/* daca punctul se afla in interval, il adaugam in vectorul de puncte */
 	if (check_point(node->point, start, end, k))
 		add_point(points, size, capacity, node->point,
@@ -136,7 +147,6 @@ void range(kd_node_t *node, int *start, int *end, int dim, int k,
 	if (node->point[dim] <= end[dim])
 		range(node->right, start, end, (dim + 1) % k, k, points, size,
 			  capacity);
-
 }
 
 void range_cmd(char *command, kd_tree_t *tree)

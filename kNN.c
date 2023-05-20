@@ -9,7 +9,6 @@
 
 int main(void)
 {
-
 	kd_tree_t *tree = NULL;
 	char *cmd_string;
 	int cmd = -1, done = 0;
@@ -21,7 +20,7 @@ int main(void)
 		switch (cmd) {
 		case 1:
 			load_cmd(cmd_string, &tree);
-			break;	
+			break;
 		case 2:
 			nn_cmd(cmd_string, tree);
 			break;
@@ -42,7 +41,6 @@ int main(void)
 
 		if (done)
 			break;
-
 	}
 
 	return 0;

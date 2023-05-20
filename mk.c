@@ -7,7 +7,7 @@
 #include "mk_commands.h"
 
 int main(void)
-{	
+{
 	trie_t *trie = trie_create(sizeof(char) * MAX_WORD_SIZE);
 	char *cmd_string;
 	int cmd = -1, done = 0;
@@ -49,7 +49,6 @@ int main(void)
 
 		if (done)
 			break;
-
 	}
 
 	return 0;

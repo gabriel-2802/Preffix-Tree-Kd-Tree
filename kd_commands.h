@@ -22,7 +22,7 @@ void load_cmd(char *command, kd_tree_t **tree);
  * @params8: capacitatea vectorului de vecini
  * */
 void nn(int *point, kd_node_t *node, int dim, int k, double *best_dist,
-        point_t **neighs, int *size, int *capacity);
+	point_t **neighs, int *size, int *capacity);
 
 /* prelucreaza datele de intrare si apeleaza functia nn
  * @params1: comanda
@@ -40,13 +40,13 @@ void nn_cmd(char *comamnd, kd_tree_t *tree);
  * @params7: dimensiunea vectorului de vecini
  * @params8: capacitatea vectorului de vecini
  * */
-void range(kd_node_t *node, int *start, int *end, int dim, int k,
-            point_t **points, int *size, int *capacity);
 
+// alignement should math open paranthesis
+void range(kd_node_t *node, int *start, int *end, int dim, int k,
+	   point_t **neighs, int *size, int *capacity);
 /* prelucreaza datele de intrare si apeleaza functia range
  * @params1: comanda
  * @params2: arborele
  */
 void range_cmd(char *command, kd_tree_t *tree);
-
 

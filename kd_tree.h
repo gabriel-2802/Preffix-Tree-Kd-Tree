@@ -16,7 +16,7 @@ struct kd_node_t {
 	kd_node_t *left, *right;
 };
 
-/* structura de kd-tree va contine numarul de dimensiuni 
+/* structura de kd-tree va contine numarul de dimensiuni
 si radacina */
 struct kd_tree_t {
 	int k;

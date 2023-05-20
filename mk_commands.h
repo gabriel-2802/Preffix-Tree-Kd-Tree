@@ -6,25 +6,25 @@
 #include "trie.h"
 #include "aux_functions.h"
 
-/* prelucreaza comanda primita si apeleaza insert 
+/* prelucreaza comanda primita si apeleaza insert
  * @params1: comanda
  * @params2: arborele
  */
 void insert_cmd(char *command, trie_t *trie);
 
-/* prelucreaza comanda primita si apeleaza load 
+/* prelucreaza comanda primita si apeleaza load
  * @params1: comanda
  * @params2: arborele
  */
 void load_cmd(char *command, trie_t *trie);
 
-/* prelucreaza comanda primita si apeleaza remove 
+/* prelucreaza comanda primita si apeleaza remove
  * @params1: comanda
  * @params2: arborele
  */
 void remove_cmd(char *command, trie_t *trie);
 
-/* prelucreaza comanda primita si apeleaza search pt a 
+/* prelucreaza comanda primita si apeleaza search pt a
 gasi cuvantul cautat
  * @params1: comanda
  * @params2: arborele
@@ -67,7 +67,7 @@ void print_first_word(tnode_t *pref_node);
 void find_shortest_word(tnode_t *pref_node, char *word, int *min_size);
 
 /*printeaza cel mai scurt cuvant, pornind de la un nod, apeland
-functia find_shprtest_word 
+functia find_shprtest_word
  *@params1: nodul cu prefixul dat*/
 void print_shortest_word(tnode_t *pref_node);
 
@@ -79,7 +79,7 @@ void print_shortest_word(tnode_t *pref_node);
 void find_most_freq_word(tnode_t *pref_node, char *word, int *freq);
 
 /*printeaza cel mai frecvent cuvant, pornind de la un nod, apeland
-functia find_most_freq_word 
+functia find_most_freq_word
  *@params1: nodul cu prefixul dat*/
 void print_most_freq_word(tnode_t *pref_node);
 

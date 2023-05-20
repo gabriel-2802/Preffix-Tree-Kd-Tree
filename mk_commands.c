@@ -6,7 +6,6 @@
 #include "trie.h"
 #include "aux_functions.h"
 
-
 void insert_cmd(char *command, trie_t *trie)
 {
 	/* obtinem cuvantul*/
@@ -39,11 +38,11 @@ void load_cmd(char *command, trie_t *trie)
 		/* eliminam caracterul '\n' de la finalul liniei */
 		if (line[len - 1] == '\n')
 			line[len - 1] = '\0';
-		
+
 		len = strlen(line);
 		/* eliminam caracterele care nu sunt litere mici */
 		for (int i = 0; i < len; ++i)
-			if ((line[i] < 'a' || line[i] > 'z' ))
+			if ((line[i] < 'a' || line[i] > 'z'))
 				line[i] = ' ';
 
 		/* obtinem cuvintele din linie si le inseram in arbore */
@@ -51,7 +50,7 @@ void load_cmd(char *command, trie_t *trie)
 		while (key) {
 			insert_trie(trie, key);
 			key = strtok(NULL, " ");
-		}	
+		}
 	}
 	/* eliberam memoria si inchidem fisierul */
 	fclose(fin);
@@ -78,12 +77,10 @@ void find_cmd(char *command, trie_t *trie)
 
 	/* cautam cuvantul in arbore */
 	tnode_t *node = search(key, trie->root, trie->data_size);
-	if (node) {
+	if (node)
 		printf("%s %d\n", (char *)node->value, node->freq);
-		
-	} else {
+	else
 		printf("No result\n");
-	}
 }
 
 void find_words(void *key, tnode_t *root, int k, int *found, int size)
@@ -91,8 +88,8 @@ void find_words(void *key, tnode_t *root, int k, int *found, int size)
 	/* daca nodul nu exista sau nr de modificari permise e negativ, dam
 	return */
 	if (!root || k < 0)
-		return;	
-	
+		return;
+
 	/* daca cuvantul are mai multe litere decat cuvantul pe care il
 	corectam, dam return */
 	if (root->value)
@@ -101,12 +98,12 @@ void find_words(void *key, tnode_t *root, int k, int *found, int size)
 
 	/* daca am gasit un cuvant, il afisam */
 	if (*(char *)key == '\0' && root->end_word == 1)  {
-			printf("%s\n", (char *)root->value);
+		printf("%s\n", (char *)root->value);
 		/* daca am gasit un cuvant, found devine 1 */
 		*found = 1;
 		return;
 	}
-	
+
 	/* cautam alte posibile cuvinte in copiii nodului */
 	tnode_t *next_node;
 	for (int i = 0; i < ALPHABET_SIZE; ++i) {
@@ -118,7 +115,8 @@ void find_words(void *key, tnode_t *root, int k, int *found, int size)
 		else
 			/* daca litera fiului este diferita de prima litera a cheii, nr de
 			caractere modificabile scade cu 1 */
-			find_words((void *)((char *)key + 1), next_node, k - 1, found, size);
+			find_words((void *)((char *)key + 1), next_node, k - 1,
+					   found, size);
 	}
 }
 
@@ -135,12 +133,11 @@ void autocorrect_cmd(char *command, trie_t *trie)
 	int k = atoi(kk);
 
 	find_words(key, trie->root, k, &found, (int)strlen(key));
-	/* daca nu am gasit niciun cuvant (found = 0), 
+	/* daca nu am gasit niciun cuvant (found = 0),
 		afisam mesajul de eroare */
 	if (!found)
 		printf("No words found\n");
 }
-
 
 tnode_t *find_first_word(tnode_t *root)
 {
@@ -154,24 +151,22 @@ tnode_t *find_first_word(tnode_t *root)
 	/* cautam primul cuvant in primul fiu al nodului */
 	for (int i = 0; i < ALPHABET_SIZE; i++) {
 		tnode_t *next_node = root->children[i];
-		if (next_node) {
+		if (next_node)
 			return find_first_word(next_node);
-			break;
-		}
 	}
 
 	return NULL;
 }
 
 void print_first_word(tnode_t *pref_node)
-{	
+{
 	/* daca prefixul primit este sfarsit de cuvant, printam
 	cuvantul */
 	if (pref_node->end_word) {
 		printf("%s\n", (char *)pref_node->value);
 		return;
 	}
-	
+
 	/* altfel, cautam primul cuvant */
 	tnode_t *print_first_word = find_first_word(pref_node);
 	printf("%s\n", (char *)print_first_word->value);
@@ -209,7 +204,7 @@ void print_shortest_word(tnode_t *pref_node)
 	niciun cuvant */
 	if (min_size == MAX_WORD_SIZE)
 		printf("No words found\n");
-	else 
+	else
 		printf("%s\n", word);
 	free(word);
 }
@@ -245,7 +240,7 @@ void print_most_freq_word(tnode_t *pref_node)
 		printf("%s\n", word);
 	else
 		printf("No words found\n");
-	
+
 	free(word);
 }
 
@@ -274,20 +269,19 @@ void autocomplete_cmd(char *command, trie_t *trie)
 
 	/* in functie de criteriu, afisam cuvantul cautat */
 	switch (crit) {
-		case 0:
-			print_first_word(pref_node);
-			print_shortest_word(pref_node);
-			print_most_freq_word(pref_node);
-			break;
-		case 1:
-			print_first_word(pref_node);
-			break;
-		case 2:
-			print_shortest_word(pref_node);
-			break;
-		case 3:	
-			print_most_freq_word(pref_node);
-			break;
+	case 0:
+		print_first_word(pref_node);
+		print_shortest_word(pref_node);
+		print_most_freq_word(pref_node);
+		break;
+	case 1:
+		print_first_word(pref_node);
+		break;
+	case 2:
+		print_shortest_word(pref_node);
+		break;
+	case 3:
+		print_most_freq_word(pref_node);
+		break;
 	}
-	
 }
