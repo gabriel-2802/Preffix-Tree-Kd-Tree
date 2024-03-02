@@ -1,2 +1,0 @@
-./kd_commands.h:25: CHECK:PARENTHESIS_ALIGNMENT: Alignment should match open parenthesis
-./kd_commands.h:46: CHECK:PARENTHESIS_ALIGNMENT: Alignment should match open parenthesis
